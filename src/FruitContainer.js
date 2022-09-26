@@ -8,7 +8,9 @@ export default class FruitContainer extends Component {
         // array of fruits to display
         fruitsToDisplay: this.props.fruits,
         // value that has been typed into the input
-        filterValue: ''
+        filterValue: '',
+        // list of fruits that where removed by the filter
+        filteredFruits: []
     }
 
     handleFilterChange = (e) => {
@@ -18,9 +20,15 @@ export default class FruitContainer extends Component {
         const filteredFruitList = this.props.fruits.filter(fruit => {
             return fruit.toLowerCase().includes(filterValue.toLowerCase())
         })
+
+        // find all fruits that do not match
+        const filteredFruits = this.props.fruits.filter(fruit => {
+            return !fruit.toLowerCase().includes(filterValue.toLowerCase())
+        })
         // set state to controlle the input
         this.setState({
             fruitsToDisplay: filteredFruitList,
+            filteredFruits,
             filterValue
         })
     }
@@ -38,7 +46,10 @@ export default class FruitContainer extends Component {
                 />
 
                 {/* give list the state to display */}
-                <List fruits={this.state.fruitsToDisplay} />
+                <List 
+                    fruits={this.state.fruitsToDisplay} 
+                    filteredFruits={this.state.filteredFruits}
+                />
             </>
         )
     }
