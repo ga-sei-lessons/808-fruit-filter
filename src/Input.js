@@ -4,7 +4,14 @@ export default class Input extends Component {
     render() {
         return (
             <div>
-                hey i will be a input
+                <label htmlFor='fruit-input'>Filter them fruits:</label>
+
+                <input 
+                    type='text'
+                    id='fruit-input'
+                    onChange={this.props.handleFilterChange}
+                    value={this.props.value}
+                />
             </div>
         )
     }
